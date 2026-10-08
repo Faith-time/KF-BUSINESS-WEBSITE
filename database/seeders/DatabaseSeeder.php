@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeProjetSeeder::class);
         $this->call(MethodePaiementSeeder::class);
         $this->call(PageContenuSeeder::class);  // UNE SEULE FOIS ✅
+        $this->call(ProjetSeeder::class);  // UNE SEULE FOIS ✅
 
         // 3. UTILISATEURS DE TEST
         User::factory()->create([

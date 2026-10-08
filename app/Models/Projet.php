@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Str;
 
 class Projet extends Model
 {
@@ -164,5 +165,17 @@ class Projet extends Model
     {
         return $this->statut === StatutProjet::FINANCEMENT &&
             now()->lessThan($this->date_fermeture_collecte);
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->slug)) {
+                $model->slug = Str::slug($model->nom);
+            }
+        });
     }
 }
